@@ -105,7 +105,12 @@ p strong {
 
 /* ===== 3. Header and navigation ===== */
 
+/* position: sticky keeps the header 16px below the top of the window
+   while the page scrolls. z-index keeps it in front of the cards. */
 .site-header {
+  position: sticky;
+  top: 16px;
+  z-index: 10;
   margin-top: 16px;
   padding: 8px 10px 8px 26px;
   border-radius: 999px;
