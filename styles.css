@@ -1,0 +1,930 @@
+/* ==========================================================
+   Ömer Faruk Eroğlu · Personal Portfolio
+   MIS326 Web Programming · Midterm Project
+   Plain CSS, no frameworks.
+
+   Layout is built with the tools from class:
+   width, margin, padding, border, background and float.
+
+   Four things go a little beyond the class examples:
+   - border-radius    rounds the corners of a box
+   - box-shadow       draws a soft shadow around a box
+   - transition       makes a :hover change happen smoothly
+   - backdrop-filter  blurs whatever is behind a box (glass look)
+
+   Colors:
+   #F6F7FB  page background        #0F172A  main text (dark navy)
+   #525B6C  secondary text (grey)  #2563EB  accent blue
+   rgba(255, 255, 255, 0.6) = white that is 60% visible (glass)
+   ========================================================== */
+
+
+/* ===== 1. Base ===== */
+
+/* Remove the browser's default spacing. With border-box, padding and
+   border are counted inside the width I give to an element. */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* The page background is a soft image that stays in place while scrolling. */
+body {
+  background-color: #F6F7FB;
+  background-image: url("images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #0F172A;
+  font-family: "Manrope", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+}
+
+a {
+  color: #0F172A;
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+/* <em> marks the highlighted word in headings: accent color, not italic. */
+em {
+  font-style: normal;
+  color: #2563EB;
+}
+
+/* Bold text inside paragraphs uses the dark text color to stand out. */
+p strong {
+  color: #0F172A;
+}
+
+/* Fixed-width page, centered with automatic left and right margins. */
+.container {
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Placed after floated boxes so the next content starts below them. */
+.clear {
+  clear: both;
+}
+
+/* Small monospace text for labels, dates and tags. */
+.label {
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+}
+
+
+/* ===== 2. Glass surfaces =====
+   One grouped rule gives every glass box the same four things:
+   1. a half-transparent white background
+   2. a blur of whatever is behind it
+   3. a thin, almost white border
+   4. a soft shadow underneath */
+.site-header,
+.hero-kicker,
+.about-card,
+.skill,
+.button,
+.contact-arrow,
+.location {
+  background-color: rgba(255, 255, 255, 0.6);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+}
+
+
+/* ===== 3. Header and navigation ===== */
+
+.site-header {
+  margin-top: 16px;
+  padding: 8px 10px 8px 26px;
+  border-radius: 999px;
+}
+
+/* Logo on the left, menu on the right. */
+.wordmark {
+  float: left;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -2px;
+  line-height: 48px;
+}
+
+.wordmark span {
+  color: #2563EB;
+}
+
+.site-header nav {
+  float: right;
+}
+
+/* Each menu item floats left, so they sit side by side. */
+.nav-list li {
+  float: left;
+  margin-left: 4px;
+}
+
+.nav-list a {
+  display: block;
+  padding: 0 16px;
+  border-radius: 999px;
+  color: #525B6C;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 48px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.nav-list a:hover {
+  background-color: #FFFFFF;
+  color: #2563EB;
+}
+
+/* The Contact link looks like a dark button. */
+.nav-list .nav-cta {
+  margin-left: 6px;
+  background-color: #0F172A;
+  color: #FFFFFF;
+}
+
+.nav-list .nav-cta:hover {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+
+/* ===== 4. Buttons ===== */
+
+.button {
+  display: inline-block;
+  margin-right: 10px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: background-color 0.3s, border-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+.button:hover {
+  background-color: #FFFFFF;
+  border-color: #2563EB;
+  color: #2563EB;
+  box-shadow: 0 18px 34px rgba(37, 99, 235, 0.25);
+}
+
+.button-primary {
+  background-color: #2563EB;
+  border-color: #2563EB;
+  color: #FFFFFF;
+}
+
+.button-primary:hover {
+  background-color: #0F172A;
+  border-color: #0F172A;
+  color: #FFFFFF;
+}
+
+.button-small {
+  padding: 9px 20px;
+  font-size: 12.5px;
+}
+
+
+/* ===== 5. Hero ===== */
+
+.hero {
+  padding-top: 64px;
+  padding-bottom: 60px;
+}
+
+/* Two columns: text floats left, the code window floats right. */
+.hero-copy {
+  float: left;
+  width: 580px;
+}
+
+.hero-kicker {
+  display: inline-block;
+  margin-bottom: 24px;
+  padding: 7px 16px;
+  border-radius: 999px;
+}
+
+/* Small blue circle in front of the label. */
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background-color: #2563EB;
+}
+
+.hero-name {
+  font-size: 88px;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -5px;
+}
+
+.hero-description {
+  width: 420px;
+  margin-top: 28px;
+  color: #525B6C;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+.hero-actions {
+  margin-top: 32px;
+}
+
+/* The code window: a dark box with rounded corners. */
+.terminal-window {
+  float: right;
+  width: 470px;
+  margin-top: 36px;
+  background-color: #1E293B;
+  border: 1px solid #475569;
+  border-radius: 24px;
+  box-shadow: 0 34px 68px rgba(15, 23, 42, 0.3);
+  color: #E2E8F0;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.terminal-window:hover {
+  border-color: #38BDF8;
+  box-shadow: 0 40px 80px rgba(37, 99, 235, 0.28);
+}
+
+.terminal-bar {
+  padding: 13px 18px;
+  border-bottom: 1px solid #334155;
+  color: #94A3B8;
+  font-size: 11px;
+  text-align: center;
+}
+
+.traffic-dots {
+  float: left;
+}
+
+/* The three colored circles. */
+.traffic-dots span {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 7px;
+  border-radius: 50%;
+}
+
+.dot-red {
+  background-color: #F87171;
+}
+
+.dot-yellow {
+  background-color: #FBBF24;
+}
+
+.dot-green {
+  background-color: #34D399;
+}
+
+.terminal-badge {
+  float: right;
+  padding: 0 9px;
+  border: 1px solid #34D399;
+  border-radius: 999px;
+  color: #34D399;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.terminal-body {
+  padding: 22px 24px;
+  font-size: 12.5px;
+  line-height: 1.95;
+}
+
+/* white-space: pre keeps the spaces I typed, so the code stays indented. */
+.code-row {
+  white-space: pre;
+}
+
+/* Line numbers and code colors. */
+.ln {
+  margin-right: 16px;
+  color: #64748B;
+}
+
+.kw {
+  color: #38BDF8;
+}
+
+.vr {
+  color: #F8FAFC;
+}
+
+.pr {
+  color: #93C5FD;
+}
+
+.st {
+  color: #A7F3D0;
+}
+
+.prompt-row {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #475569;
+}
+
+.prompt {
+  color: #34D399;
+}
+
+.command {
+  color: #F8FAFC;
+}
+
+.terminal-footer {
+  padding: 10px 20px;
+  background-color: #0F172A;
+  border-radius: 0 0 24px 24px;
+  color: #94A3B8;
+  font-size: 10px;
+}
+
+.terminal-right {
+  float: right;
+}
+
+.status-ok {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background-color: #34D399;
+}
+
+
+/* ===== 6. Focus areas strip ===== */
+
+.strip {
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-top: 1px solid #DDE1EA;
+  color: #525B6C;
+}
+
+.strip-title {
+  float: left;
+}
+
+.strip ul {
+  float: right;
+  color: #0F172A;
+  font-weight: 600;
+}
+
+.strip li {
+  float: left;
+  margin-left: 28px;
+}
+
+.strip .slash {
+  color: #2563EB;
+}
+
+
+/* ===== 7. Shared section styles ===== */
+
+/* Sections with a slightly darker, half-transparent background. */
+.tinted-section {
+  padding-top: 92px;
+  padding-bottom: 108px;
+  background-color: rgba(226, 231, 242, 0.55);
+  border-top: 1px solid #FFFFFF;
+  border-bottom: 1px solid #FFFFFF;
+}
+
+.plain-section {
+  padding-top: 92px;
+  padding-bottom: 108px;
+}
+
+/* The small blue pill above each section title. */
+.section-label {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #E3EBFD;
+  border: 1px solid #C5D5FA;
+  border-radius: 999px;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.big-title {
+  margin-top: 20px;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -4px;
+}
+
+
+/* ===== 8. About Me ===== */
+
+/* About and Skills use two columns: the heading floats left,
+   the content floats right. */
+.side-intro {
+  float: left;
+  width: 340px;
+}
+
+.side-intro h2 {
+  margin-top: 44px;
+  font-size: 60px;
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -3px;
+}
+
+.signature {
+  margin-top: 32px;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.signature span {
+  display: block;
+  margin-top: 4px;
+  color: #525B6C;
+  font-size: 10px;
+  font-weight: 400;
+}
+
+.about-card {
+  float: right;
+  width: 720px;
+  margin-top: 72px;
+  padding: 28px;
+  border-radius: 28px;
+}
+
+/* The photo floats left inside the card; the text sits beside it. */
+.photo-card {
+  float: left;
+  width: 210px;
+  padding: 7px;
+  background-color: #FFFFFF;
+  border: 1px solid #FFFFFF;
+  border-radius: 22px;
+  box-shadow: 0 16px 34px rgba(15, 23, 42, 0.16);
+  transition: border-color 0.4s, box-shadow 0.4s;
+}
+
+.photo-card:hover {
+  border-color: #2563EB;
+  box-shadow: 0 24px 44px rgba(37, 99, 235, 0.2);
+}
+
+.profile-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+}
+
+/* The left margin leaves room for the floated photo. */
+.about-bio {
+  margin-left: 242px;
+}
+
+.about-bio p {
+  margin-bottom: 16px;
+  color: #525B6C;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+
+/* ===== 9. Education ===== */
+
+.rows {
+  margin-top: 56px;
+  border-top: 1px solid #DDE1EA;
+}
+
+.row {
+  padding: 32px 20px;
+  border-bottom: 1px solid #DDE1EA;
+  border-radius: 20px;
+  transition: background-color 0.3s;
+}
+
+.row:hover {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* The date floats left; the text is pushed right with a margin. */
+.row-date {
+  float: left;
+  width: 200px;
+  padding-top: 8px;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.row-text {
+  margin-left: 232px;
+}
+
+.row-text h3 {
+  font-size: 27px;
+  font-weight: 600;
+  letter-spacing: -1px;
+}
+
+.row-text p {
+  width: 700px;
+  margin-top: 8px;
+  color: #525B6C;
+  font-size: 15px;
+}
+
+
+/* ===== 10. Skills ===== */
+
+/* The cards sit in a 720px column on the right, next to the heading. */
+.skills-list {
+  float: right;
+  width: 720px;
+  margin-top: 72px;
+}
+
+/* Two cards per row: 2 x 349px + 22px gap = 720px. */
+.skill {
+  float: left;
+  width: 349px;
+  height: 196px;
+  margin-right: 22px;
+  margin-bottom: 22px;
+  padding: 26px 26px;
+  border-radius: 26px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Every second card is the last in its row, so it has no right gap. */
+.skill:nth-child(2n) {
+  margin-right: 0;
+}
+
+.skill:hover {
+  border-color: #2563EB;
+  box-shadow: 0 24px 48px rgba(37, 99, 235, 0.25);
+}
+
+.skill-num {
+  display: inline-block;
+  margin-bottom: 14px;
+  padding: 3px 11px;
+  background-color: #E3EBFD;
+  border: 1px solid #C5D5FA;
+  border-radius: 999px;
+  color: #2563EB;
+  font-weight: 600;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.skill:hover .skill-num {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+.skill h3 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  transition: color 0.3s;
+}
+
+.skill:hover h3 {
+  color: #2563EB;
+}
+
+.skill p {
+  margin-top: 10px;
+  color: #525B6C;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.85;
+}
+
+
+/* ===== 11. Projects ===== */
+
+/* ID selector: the projects section has its own spacing. */
+#projects {
+  padding-top: 104px;
+  padding-bottom: 68px;
+}
+
+.section-heading {
+  margin-bottom: 72px;
+}
+
+.section-heading h2 {
+  float: left;
+}
+
+.section-heading p {
+  float: right;
+  width: 340px;
+  margin-top: 132px;
+  color: #525B6C;
+  font-size: 15px;
+}
+
+.project {
+  padding-top: 36px;
+  padding-bottom: 76px;
+  border-top: 1px solid #DDE1EA;
+}
+
+.project-number {
+  margin-bottom: 26px;
+  color: #525B6C;
+}
+
+.project-number .number {
+  margin-right: 16px;
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.project-year {
+  float: right;
+}
+
+/* Two columns: text floats left, screenshots float right. */
+.project-info {
+  float: left;
+  width: 340px;
+  padding-top: 40px;
+}
+
+.project-tech {
+  color: #2563EB;
+  font-weight: 600;
+}
+
+.project-info h3 {
+  margin-top: 14px;
+  font-size: 38px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -2px;
+  transition: color 0.3s;
+}
+
+.project:hover .project-info h3 {
+  color: #2563EB;
+}
+
+.project-summary {
+  margin-top: 18px;
+  color: #525B6C;
+  font-size: 15px;
+  line-height: 1.85;
+}
+
+/* Technology tags. */
+.stack {
+  margin-top: 22px;
+  margin-bottom: 20px;
+}
+
+.stack li {
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 6px;
+  padding: 5px 14px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 1px solid #BFD0F7;
+  border-radius: 999px;
+  color: #2563EB;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.stack li:hover {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+/* The box that holds the screenshots of a project. */
+.project-art {
+  float: right;
+  width: 700px;
+  padding: 44px 36px 20px 36px;
+  border: 1px solid #FFFFFF;
+  border-radius: 30px;
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.14);
+  text-align: center;
+  transition: box-shadow 0.4s;
+}
+
+.project-art:hover {
+  box-shadow: 0 36px 72px rgba(15, 23, 42, 0.22);
+}
+
+/* Each project has its own background tint: green, blue, amber. */
+.art-snake {
+  background-color: rgba(34, 197, 94, 0.14);
+}
+
+.art-inventra {
+  background-color: rgba(37, 99, 235, 0.12);
+}
+
+.art-horologe {
+  background-color: rgba(217, 119, 6, 0.12);
+}
+
+.project-art img {
+  height: 420px;
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.project-art figcaption {
+  margin-top: 20px;
+  color: #525B6C;
+  text-align: left;
+}
+
+/* Horologe: a small browser window drawn around the screenshot. */
+.browser-frame {
+  background-color: #0F172A;
+  border-radius: 18px;
+  box-shadow: 0 26px 48px rgba(15, 23, 42, 0.28);
+  text-align: left;
+}
+
+.browser-frame-bar {
+  padding: 9px 14px;
+}
+
+.browser-frame-bar .traffic-dots {
+  margin-top: 2px;
+}
+
+.frame-url {
+  margin-left: 10px;
+  padding: 2px 12px;
+  background-color: #334155;
+  border-radius: 6px;
+  color: #CBD5E1;
+  font-family: "IBM Plex Mono", "Courier New", monospace;
+  font-size: 10px;
+}
+
+.browser-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  border-radius: 0 0 18px 18px;
+}
+
+
+/* ===== 12. Download CV ===== */
+
+/* Two columns: the title floats left, the download box floats right. */
+.cv-intro {
+  float: left;
+}
+
+.cv-box {
+  float: right;
+  width: 440px;
+  margin-top: 104px;
+}
+
+.cv-box p {
+  margin-bottom: 24px;
+  color: #525B6C;
+}
+
+
+/* ===== 13. Contact ===== */
+
+/* ID selector: the contact section has its own spacing. */
+#contact {
+  padding-top: 92px;
+  padding-bottom: 36px;
+}
+
+.contact-heading {
+  margin-top: 32px;
+}
+
+.contact-heading h2 {
+  font-size: 110px;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -6px;
+}
+
+/* A round button: equal width and height with a 50% border radius. */
+.contact-arrow {
+  float: right;
+  width: 112px;
+  height: 112px;
+  margin-top: 100px;
+  border-radius: 50%;
+  font-size: 42px;
+  line-height: 108px;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.contact-arrow:hover {
+  background-color: #2563EB;
+  color: #FFFFFF;
+}
+
+.contact-bottom {
+  margin-top: 52px;
+}
+
+.contact-bottom p {
+  color: #525B6C;
+  font-size: 15px;
+}
+
+.email {
+  display: inline-block;
+  margin-top: 8px;
+  color: #2563EB;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+}
+
+.email:hover {
+  text-decoration: underline;
+}
+
+.social {
+  float: right;
+  margin-top: 30px;
+}
+
+.social li {
+  float: left;
+}
+
+.location {
+  padding: 9px 18px;
+  border-radius: 999px;
+  color: #525B6C;
+}
+
+
+/* ===== 14. Footer ===== */
+
+.site-footer {
+  margin-top: 56px;
+  padding-top: 28px;
+  padding-bottom: 28px;
+  border-top: 1px solid #DDE1EA;
+  color: #525B6C;
+  text-align: center;
+}
+
+.footer-left {
+  float: left;
+}
+
+.footer-right {
+  float: right;
+  color: #0F172A;
+  font-weight: 600;
+}
+
+.footer-right:hover {
+  color: #2563EB;
+}
