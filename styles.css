@@ -32,10 +32,6 @@
 /* The page background is a soft image that stays in place while scrolling. */
 body {
   background-color: #F6F7FB;
-  background-image: url("images/background.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
   color: #0F172A;
   font-family: "Manrope", Arial, sans-serif;
   font-size: 16px;
@@ -43,6 +39,23 @@ body {
   /* The page is built 1100px wide. min-width stops it from getting narrower,
      so in a small window the page scrolls sideways instead of getting cut off. */
   min-width: 1180px;
+}
+
+/* The background image lives on its own layer that is fixed to the screen.
+   Phone browsers (Samsung Internet, Safari) handle "background-attachment: fixed"
+   badly and make the image jump or zoom, so a fixed layer is used instead. */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url("images/background.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 a {
